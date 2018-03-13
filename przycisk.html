@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+
+<head>
+ <meta charset="utf-8">
+ <title>Szubienica</title>
+ <link rel="stylesheet" href="styl.css" type="text/css">
+ <script
+         src="https://code.jquery.com/jquery-3.3.1.min.js"
+         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+         crossorigin="anonymous"></script>
+ <link href="https://fonts.googleapis.com/css?family=Freckle+Face" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+<h1> Zgadnij słowo z kategorii: "Zwierzęta"</h1>
+<h2> Kliknij "Losuj hasło" aby rozpocząć. Ilość prób jest dwukrotnie większa od długości wylosowanego hasła:)</h2>
+
+<div id="klik">Losuj hasło</div>
+<div id="reload">Od nowa</div>
+<div id="haslo"></div>
+<div id="licznik"></div>
+
+
+<div id="alfabet">
+<span onclick='litera("a")'>a</span>
+<span onclick='litera("b")'>b</span>
+<span onclick='litera("c")'>c</span>
+<span onclick='litera("d")'>d</span>
+<span onclick='litera("e")'>e</span>
+<span onclick='litera("f")'>f</span>
+<span onclick='litera("g")'>g</span>
+<span onclick='litera("h")'>h</span>
+<span onclick='litera("i")'>i</span>
+<span onclick='litera("j")'>j</span>
+<span onclick='litera("k")'>k</span>
+<span onclick='litera("l")'>l</span>
+<span onclick='litera("m")'>m</span>
+<span onclick='litera("n")'>n</span>
+<span onclick='litera("o")'>o</span>
+<span onclick='litera("p")'>p</span>
+<span onclick='litera("r")'>r</span>
+<span onclick='litera("s")'>s</span>
+<span onclick='litera("t")'>t</span>
+<span onclick='litera("u")'>u</span>
+<span onclick='litera("w")'>w</span>
+<span onclick='litera("x")'>x</span>
+<span onclick='litera("y")'>y</span>
+<span onclick='litera("z")'>z</span>
+</div>
+
+
+
+
+
+
+
+<script>
+
+    var tablica=[];
+    var haslo="";
+    var odpowiedz=[];
+    var flaga=0;
+    var licznik=0;
+    var secure=false;
+
+    document.getElementById("licznik").innerHTML=licznik;
+
+    var losowanie=function(){
+
+      $("h2").slideUp(1000);
+      secure=true;
+      if(flaga==1) return;
+
+
+         tablica=["kot","pies","panda","lew","tygrys"];
+         haslo=tablica[Math.floor(Math.random()*tablica.length)];
+
+
+    for(var i=0;i<haslo.length;i++)
+    {
+
+
+        odpowiedz.push("-");
+
+
+    }
+
+    document.getElementById("haslo").innerHTML=odpowiedz.join("");
+    flaga++;
+
+    };
+
+    $("#klik").click(losowanie);
+
+    var rel=function(){
+
+
+
+        location.reload();
+
+    };
+   $("#reload").click(rel);
+
+
+
+
+ function litera(x){
+
+     if(secure==false) return;
+
+     licznik++;
+     document.getElementById("licznik").innerHTML=licznik;
+
+     for(i=0;i<haslo.length;i++)
+     {
+
+         if(haslo[i]==x)
+         {
+
+             odpowiedz[i]=x;
+             document.getElementById("haslo").innerHTML=odpowiedz.join("");
+
+         }
+
+
+
+     }
+
+    if((odpowiedz.join("")==haslo)&&(secure==true))
+    {
+
+        $("h1").text("Wygrałeś!!!");
+        $("#alfabet").slideUp(200);
+        $("#klik").slideUp(200);
+
+        exit();
+    }
+
+    if(licznik>haslo.length*2-1)
+    {
+
+        $("h1").text("Przegrana");
+        $("#alfabet").slideUp(200);
+        $("#klik").slideUp(200);
+
+    }
+
+
+
+
+
+ }
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>
